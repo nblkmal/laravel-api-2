@@ -37,6 +37,8 @@ class PurchaseController extends Controller
      */
     public function store(Request $request, Hardware $hardware)
     {
+
+        $toyyibpay_secret_key = config('services.toyyibpay.secret');
         // store book
         $purchase = Purchase::create([
             'user_id' => auth()->user()->id,
@@ -48,15 +50,15 @@ class PurchaseController extends Controller
         $url = 'https://dev.toyyibpay.com/index.php/api/createBill';
 
         $response = Http::asForm()->post($url, [
-            'userSecretKey' => 'czbbbpan-1b56-8is1-65cl-wjoun02tycye',
+            'userSecretKey' => $toyyibpay_secret_key,
             'categoryCode' => 'gjmpjh9h',
             'billName' => auth()->user()->name,
             'billDescription' => 'Booking '.$hardware->name,
             'billPriceSetting' => 1,
             'billAmount' => $hardware->price,
-            'billReturnUrl' => 'http://127.0.0.1:8888/return-url',
-            'billCallbackUrl' => 'http://127.0.0.1:8888/callback-url',
-            'billExternalReferenceNo' => $purchase->id,
+            'billReturnUrl' => url('/return-url'),
+            'billCallbackUrl' => url('/callback-url'),
+            'billExternalReferenceNo' => $purchase->uuid.$purchase->id,
             'billTo' => auth()->user()->name,
             'billEmail' => auth()->user()->email,
             'billPhone' => '0124441998',

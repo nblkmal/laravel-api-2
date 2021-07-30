@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Purchase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*

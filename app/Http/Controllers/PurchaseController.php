@@ -55,7 +55,7 @@ class PurchaseController extends Controller
             'billPriceSetting' => 1,
             'billAmount' => $hardware->price,
             'billReturnUrl' => 'http://127.0.0.1:8888/return-url',
-            'billCallbackUrl' => 'http://127.0.0.1:8888/call-back-url',
+            'billCallbackUrl' => 'http://127.0.0.1:8888/callback-url',
             'billExternalReferenceNo' => $purchase->id,
             'billTo' => auth()->user()->name,
             'billEmail' => auth()->user()->email,

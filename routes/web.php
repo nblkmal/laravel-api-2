@@ -47,3 +47,9 @@ Route::get('/return-url', function (Request $request) {
         return 'Please check response';
     }
 });
+
+Route::post('/callback-url', function (Request $request) {
+    \info(['from payment gateway' => $request->all()]);
+
+    return response([], 203);
+});
